@@ -4,6 +4,7 @@ import com.excercises.swiftAPI.models.BankEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MapperToDTO {
@@ -30,6 +31,19 @@ public class MapperToDTO {
                 .isHeadquarter(bankEntity.isHeadquarter())
                 .swiftCode(bankEntity.getSwiftCode())
                 .branches(bankEntity.isHeadquarter() ? reducedBranches : null)
+                .build();
+    }
+
+    public CountryDTO toCountryDTO(String countryISO2, String countryName, List<BankEntity> bankEntities) {
+        List<ReducedBankDTO> swiftCodes = bankEntities.stream()
+                .filter(bank -> bank.getCountryISO2().equals(countryISO2))
+                .map(this::toReducedBankDTO)
+                .collect(Collectors.toList());
+
+        return CountryDTO.builder()
+                .countryISO2(countryISO2)
+                .countryName(countryName)
+                .swiftCodes(swiftCodes)
                 .build();
     }
 }
