@@ -2,15 +2,19 @@ package com.excercises.swiftAPI.services;
 
 import com.excercises.swiftAPI.exceptions.BankNotFoundException;
 import com.excercises.swiftAPI.exceptions.CountryNotFoundException;
+import com.excercises.swiftAPI.exceptions.InvalidDataException;
+import com.excercises.swiftAPI.exceptions.ResourceAlreadyExistsException;
 import com.excercises.swiftAPI.models.BankEntity;
 import com.excercises.swiftAPI.models.DTOs.BankDTO;
 import com.excercises.swiftAPI.models.DTOs.CountryDTO;
 import com.excercises.swiftAPI.models.DTOs.MapperToDTO;
 import com.excercises.swiftAPI.repositories.SwiftApiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +37,17 @@ public class SwiftApiService {
             throw new CountryNotFoundException("CountryDTO with " + countryISO2 + " ISO2 code - not found.");
         }
         return mapper.toCountryDTO(countryISO2, countryIso2ToName(countryISO2), foundBankEntities);
+    }
+
+    public ResponseEntity<Map<String,String>> addBankEntityToDatabase(BankEntity bankEntity) {
+        try {
+            uppercaseSwiftISO2CountryOfBankEntity(bankEntity);
+            swiftCodeValidationOfBank(bankEntity);
+            repository.save(bankEntity);
+            return ResponseEntity.ok(Map.of("message", "SWIFT Code added successfully"));
+        } catch (Exception e) {
+            throw new InvalidDataException(e.getMessage());
+        }
     }
 
     // If the provided SWIFT code is 8 characters (main SWIFT code), append "XXX" to return the headquarters SWIFT code.
@@ -94,4 +109,27 @@ public class SwiftApiService {
                 .map(BankEntity::getCountryName)
                 .orElse(null);
     }
+
+    public void swiftCodeValidationOfBank (BankEntity bankEntity) {
+        String swiftCode = bankEntity.getSwiftCode();
+        if (repository.existsBySwiftCode(swiftCode)) {
+            throw new ResourceAlreadyExistsException("Invalid SWIFT code: already exists.");
+        }
+        if ((swiftCode.length() != 11 && swiftCode.length() != 8) || !swiftCode.matches("[A-Z0-9]+")) {
+            throw new InvalidDataException("Invalid SWIFT code: must be 8 or 11 alphanumeric characters.");
+        }
+        if (swiftCode.length() == 8) {
+            if (bankEntity.isHeadquarter()) {
+                bankEntity.setSwiftCode(ifEightDigitSwiftToHeadquartersSwift(swiftCode));
+            }
+            else {
+                throw new InvalidDataException("Invalid branch's SWIFT code: must be 11 alphanumeric characters.");
+            }
+        }
+        if (bankEntity.isHeadquarter() ^ isBranchAHeadquarters(bankEntity.getSwiftCode())) {
+            throw new InvalidDataException("isHeadquarter input field is " + bankEntity.isHeadquarter()
+                    + " while SWIFT code indicates it is " + isBranchAHeadquarters(bankEntity.getSwiftCode()));
+        }
+    }
+
 }
