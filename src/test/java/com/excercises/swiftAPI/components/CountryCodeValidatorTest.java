@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CountryCodeValidatorTest {
+    
     private CountryCodeValidator validator;
 
     @BeforeEach

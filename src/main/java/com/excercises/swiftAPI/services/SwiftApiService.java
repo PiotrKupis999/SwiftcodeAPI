@@ -27,8 +27,6 @@ public class SwiftApiService {
     @Autowired
     CountryCodeValidator countryCodeValidator;
 
-
-
     public BankDTO getBankBySwiftCode(String swiftCode) {
         BankEntity foundBank = repository.findById(ifEightDigitSwiftToHeadquartersSwift(swiftCode))
                 .orElseThrow(() -> new BankNotFoundException("No bank found with SWIFT code: " + swiftCode));
@@ -148,5 +146,4 @@ public class SwiftApiService {
                     + " while SWIFT code indicates it is " + isBranchAHeadquarters(bankEntity.getSwiftCode()));
         }
     }
-
 }

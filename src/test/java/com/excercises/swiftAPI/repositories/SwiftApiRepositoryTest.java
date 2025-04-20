@@ -14,6 +14,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class SwiftApiRepositoryTest {
+
     @Autowired
     private SwiftApiRepository swiftApiRepository;
 
@@ -212,6 +213,7 @@ public class SwiftApiRepositoryTest {
 
     @Test
     public void testExistsBySwiftCode_ExistingSwiftCode() {
+
         BankEntity bankEntity = BankEntity.builder()
                 .swiftCode("12345678ABC")
                 .address("Warsaw")
