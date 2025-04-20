@@ -1,6 +1,9 @@
-package com.excercises.swiftAPI.models.DTOs;
+package com.excercises.swiftAPI.components.mappers;
 
 import com.excercises.swiftAPI.models.BankEntity;
+import com.excercises.swiftAPI.models.DTOs.BankDTO;
+import com.excercises.swiftAPI.models.DTOs.CountryDTO;
+import com.excercises.swiftAPI.models.DTOs.ReducedBankDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

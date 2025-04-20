@@ -36,4 +36,11 @@ public class SwiftApiController {
     public ResponseEntity<Map<String, String>> addSwiftCode(@RequestBody BankEntity bankEntity) {
         return swiftApiService.addBankEntityToDatabase(bankEntity);
     }
+
+    @DeleteMapping("/{swift-code}")
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> deleteSwiftCode(@PathVariable("swift-code") String swiftCode) {
+        Map<String, String> response = swiftApiService.deleteBankEntityFromDatabase(swiftCode.toUpperCase());
+        return ResponseEntity.ok(response);
+    }
 }

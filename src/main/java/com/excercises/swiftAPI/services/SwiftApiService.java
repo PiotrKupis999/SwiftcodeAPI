@@ -1,5 +1,6 @@
 package com.excercises.swiftAPI.services;
 
+import com.excercises.swiftAPI.components.validators.CountryCodeValidator;
 import com.excercises.swiftAPI.exceptions.BankNotFoundException;
 import com.excercises.swiftAPI.exceptions.CountryNotFoundException;
 import com.excercises.swiftAPI.exceptions.InvalidDataException;
@@ -7,7 +8,7 @@ import com.excercises.swiftAPI.exceptions.ResourceAlreadyExistsException;
 import com.excercises.swiftAPI.models.BankEntity;
 import com.excercises.swiftAPI.models.DTOs.BankDTO;
 import com.excercises.swiftAPI.models.DTOs.CountryDTO;
-import com.excercises.swiftAPI.models.DTOs.MapperToDTO;
+import com.excercises.swiftAPI.components.mappers.MapperToDTO;
 import com.excercises.swiftAPI.repositories.SwiftApiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,10 @@ public class SwiftApiService {
     SwiftApiRepository repository;
     @Autowired
     MapperToDTO mapper;
+    @Autowired
+    CountryCodeValidator countryCodeValidator;
+
+
 
     public BankDTO getBankBySwiftCode(String swiftCode) {
         BankEntity foundBank = repository.findById(ifEightDigitSwiftToHeadquartersSwift(swiftCode))
@@ -42,12 +47,24 @@ public class SwiftApiService {
     public ResponseEntity<Map<String,String>> addBankEntityToDatabase(BankEntity bankEntity) {
         try {
             uppercaseSwiftISO2CountryOfBankEntity(bankEntity);
+            countryCodeValidator.validateCountryCodeAndName(bankEntity.getCountryISO2(), bankEntity.getCountryName());
             swiftCodeValidationOfBank(bankEntity);
             repository.save(bankEntity);
             return ResponseEntity.ok(Map.of("message", "SWIFT Code added successfully"));
         } catch (Exception e) {
             throw new InvalidDataException(e.getMessage());
         }
+    }
+
+    public Map<String,String> deleteBankEntityFromDatabase(String swiftCode) {
+        BankEntity foundBank = repository.findById(ifEightDigitSwiftToHeadquartersSwift(swiftCode))
+                .orElseThrow(() -> new BankNotFoundException("No bank found with SWIFT code: " + swiftCode));
+        repository.delete(foundBank);
+        String message = "SWIFT Code deleted successfully";
+        if(swiftCode.length() == 8){
+            message += " (inserted code was eight digit so deleted SWIFT Code is " +swiftCode+ "XXX)";
+        }
+        return Map.of("message", message);
     }
 
     // If the provided SWIFT code is 8 characters (main SWIFT code), append "XXX" to return the headquarters SWIFT code.
