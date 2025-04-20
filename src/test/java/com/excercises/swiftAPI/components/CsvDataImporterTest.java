@@ -11,6 +11,7 @@ import java.util.List;
 
 @SpringBootTest
 public class CsvDataImporterTest {
+
     @Autowired
     private CsvDataImporter csvDataImporter;
 

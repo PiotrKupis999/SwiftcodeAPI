@@ -122,6 +122,7 @@ public class SwiftApiServiceTest {
 
     @Test
     public void SwiftApiServiceTest_SwiftCodeValidationOfBank() {
+
         BankEntity existingBank = BankEntity.builder()
                 .swiftCode("12345678XXX")
                 .address("Test Address")
@@ -188,6 +189,7 @@ public class SwiftApiServiceTest {
 
     @Test
     public void SwiftApiServiceTest_AddBankEntityToDatabase() {
+
         BankEntity bankEntity = BankEntity.builder()
                 .swiftCode("78945612XXX")
                 .address("New York")
@@ -206,6 +208,7 @@ public class SwiftApiServiceTest {
 
     @Test
     public void SwiftApiServiceTest_DeleteBankEntityFromDatabase() {
+
         BankEntity bankEntity = BankEntity.builder()
                 .swiftCode("87654321XXX")
                 .address("Los Angeles")
@@ -226,6 +229,7 @@ public class SwiftApiServiceTest {
 
     @Test
     public void SwiftApiServiceTest_GetBankEntityBySwiftCode_NotFound() {
+
         BankEntity bankEntity = BankEntity.builder()
                 .swiftCode("99999999XXX")
                 .address("NonExistent")
