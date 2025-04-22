@@ -222,7 +222,7 @@ public class SwiftApiServiceTest {
 
         Map<String, String> result = swiftApiService.deleteBankEntityFromDatabase("87654321XXX");
 
-        Assertions.assertEquals("SWIFT Code deleted successfully", result.get("message"));
+        Assertions.assertEquals("Deleted headquarter 87654321XXX", result.get("message"));
         Optional<BankEntity> deletedBank = swiftApiRepository.findById("87654321XXX");
         Assertions.assertFalse(deletedBank.isPresent());
     }

@@ -21,4 +21,4 @@ services:
       spring.datasource.password: password
     depends_on:
       - postgres
-    restart: always
+    restart: on-failure
