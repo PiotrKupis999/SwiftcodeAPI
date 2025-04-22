@@ -18,6 +18,8 @@ public class CountryCodeValidator {
     private String iso2dataPath;
 
     private final Map<String, String> countryCodeToName = new HashMap<>();
+    private final Map<String, String> nameToCountryCode = new HashMap<>();
+
 
     @PostConstruct
     public void init() throws IOException {
@@ -28,6 +30,7 @@ public class CountryCodeValidator {
                 String[] parts = line.split(",");
                 if (parts.length == 2) {
                     countryCodeToName.put(parts[1].trim().toUpperCase(), parts[0].trim().toUpperCase());
+                    nameToCountryCode.put(parts[0].trim().toUpperCase(), parts[1].trim().toUpperCase());
                 }
             }
         }
@@ -42,5 +45,12 @@ public class CountryCodeValidator {
             throw new InvalidDataException("Country name '" + name + "' does not match ISO2 code '" + iso2 +
                     "'. Expected country name: " + expectedName);
         }
+    }
+
+    public String countryNametoISO2(String countryName) {
+        if (nameToCountryCode.get(countryName) == null) {
+            return countryName;
+        }
+        return nameToCountryCode.get(countryName);
     }
 }

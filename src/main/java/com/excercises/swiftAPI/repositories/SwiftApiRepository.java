@@ -10,6 +10,11 @@ import java.util.Optional;
 @Repository
 public interface SwiftApiRepository extends JpaRepository<BankEntity, String> {
     List<BankEntity> findAllBanksByCountryISO2(String countryISO2);
+
     Optional<BankEntity> findFirstByCountryISO2(String countryISO2);
+
     boolean existsBySwiftCode(String swiftCode);
+
+    List<BankEntity> findBySwiftCodeStartingWith(String eightDigitSwiftCode);
 }
+

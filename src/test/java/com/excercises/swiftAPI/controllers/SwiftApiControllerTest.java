@@ -65,6 +65,16 @@ public class SwiftApiControllerTest {
                 .isHeadquarter(true)
                 .build();
         swiftApiRepository.save(anotherBank);
+
+        BankEntity anotherBank1 = BankEntity.builder()
+                .swiftCode("87654321AAA")
+                .address("NearSydney")
+                .bankName("Bank G")
+                .countryISO2("AU")
+                .countryName("AUSTRALIA")
+                .isHeadquarter(false)
+                .build();
+        swiftApiRepository.save(anotherBank1);
     }
 
     @Test
@@ -81,7 +91,8 @@ public class SwiftApiControllerTest {
                         .param("bankName", "Bank F")
                         .param("countryISO2", "AU"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message", is("SWIFT Code deleted successfully")));
+                .andExpect(jsonPath("$.message", is("Deleted headquarter 87654321XXX and " +
+                        "associated branches: AAA, ")));
     }
 
     @Test
