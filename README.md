@@ -59,7 +59,7 @@ The application parses SWIFT codes from a provided file, stores them in a databa
 git clone https://github.com/voowu/SwiftcodeAPI
 cd SwiftcodeAPI
 docker-compose up -d
-echo Done!
+ 
 ```
 
 
