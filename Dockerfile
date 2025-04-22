@@ -15,7 +15,7 @@ WORKDIR /app
 
 COPY Interns_2025_SWIFT_CODES.csv /app/
 COPY ISO2DATA.csv /app/
-COPY target/*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 
 EXPOSE 8080
 
