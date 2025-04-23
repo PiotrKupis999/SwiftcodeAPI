@@ -23,11 +23,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(CsvProcessingException.class)
     public ResponseEntity<String> handleCsvProcessingException(CsvProcessingException e) {
+        logger.error("CSV Processing Failed: {}", e.getMessage());
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(CountryNotFoundException.class)
     public ResponseEntity<String> handleCountryNotFoundException(CountryNotFoundException e) {
+        logger.warn("Country not found");
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
 
@@ -37,7 +39,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(InvalidDataException.class)
-    public ResponseEntity<String> invalidDataException(InvalidDataException e) {
+    public ResponseEntity<String> handleInvalidDataException(InvalidDataException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
