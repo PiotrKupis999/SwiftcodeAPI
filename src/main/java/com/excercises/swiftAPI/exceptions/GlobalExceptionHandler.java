@@ -2,6 +2,8 @@ package com.excercises.swiftAPI.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -30,6 +32,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidDataException.class)
     public ResponseEntity<String> invalidDataException(InvalidDataException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public ResponseEntity<String> handleInvalidJson(HttpMediaTypeNotSupportedException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<String> handleInvalidJson(HttpMessageNotReadableException e) {
+        return new ResponseEntity<>("Check your JSON format. " + e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
