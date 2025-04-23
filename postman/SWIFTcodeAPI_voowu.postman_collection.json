@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "3eecad3f-9d26-4256-a608-f7ed06300700",
+		"name": "SWIFTcodeAPI_voowu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44332245",
+		"_collection_link": "https://marek-5091395.postman.co/workspace/Swift-API~b7c2b2eb-bf60-49cd-9c38-4dfffc02e979/collection/44332245-3eecad3f-9d26-4256-a608-f7ed06300700?action=share&source=collection_link&creator=44332245"
+	},
+	"item": [
+		{
+			"name": "Get All Banks By ISO2 Code",
+			"item": [
+				{
+					"name": "PL_GetAllBanksByISO2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/country/PL",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"country",
+								"PL"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Monaco_GetAllBanksByISO2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/country/monaco",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"country",
+								"monaco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404Italy_GetAllBanksByISO2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/country/it",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"country",
+								"it"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Return all SWIFT codes with details for a specific country (both headquarters and branches)**"
+		},
+		{
+			"name": "Get Bank By SWIFT code",
+			"item": [
+				{
+					"name": "HQ1_GetBankBySWIFT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/NBPLPLPWXXX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"NBPLPLPWXXX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HQ2_GetBankBySWIFT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/LLBBLV2Xxxx",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"LLBBLV2Xxxx"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "B1_GetBankBySWIFT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/CITIBGSFTRD",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"CITIBGSFTRD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "B2_GetBankBySWIFT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/RIKOLV2XIPA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"RIKOLV2XIPA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "404_GetBankBySWIFT",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/12345678561",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"12345678561"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Retrieve details of a single SWIFT code whether for a headquarters or branches.**"
+		},
+		{
+			"name": "POST - Add new SWIFT",
+			"item": [
+				{
+					"name": "HQ_AddNewSWIFT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Cracow\",\r\n    \"bankName\": \"Bank w Krakowie\",\r\n    \"countryISO2\": \"PL\",\r\n    \"countryName\": \"POLAND\",\r\n    \"isHeadquarter\": true,\r\n    \"swiftCode\": \"12345678XXX\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "B_AddNewSWIFT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Krakow\",\r\n    \"bankName\": \"PEKAO TOWARZYSTWO FUNDUSZY  INWESTYCYJNYCH SPOLKA AKCYJNA\",\r\n    \"countryISO2\": \"PL\",\r\n    \"countryName\": \"POLAND\",\r\n    \"isHeadquarter\": false,\r\n    \"swiftCode\": \"TPEOPLPW000\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1_unmatch (isHeadquarters & SWIFT)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Warszawa\",\r\n    \"bankName\": \"Super Bank\",\r\n    \"countryISO2\": \"PL\",\r\n    \"countryName\": \"POLAND\",\r\n    \"isHeadquarter\": false,\r\n    \"swiftCode\": \"88888888XXX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2_unmatch (no HQ for Branch)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Warszawa\",\r\n    \"bankName\": \"Super Bank\",\r\n    \"countryISO2\": \"PL\",\r\n    \"countryName\": \"POLAND\",\r\n    \"isHeadquarter\": false,\r\n    \"swiftCode\": \"88888888000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3_unmatch (too short SWIFT)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Warszawa\",\r\n    \"bankName\": \"Super Bank\",\r\n    \"countryISO2\": \"PL\",\r\n    \"countryName\": \"POLAND\",\r\n    \"isHeadquarter\": false,\r\n    \"swiftCode\": \"88888888XX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Add new SWIFT code entries to the database for a specific country.**"
+		},
+		{
+			"name": "Delete SWIFT code",
+			"item": [
+				{
+					"name": "B_DeleteBankBySWIFT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/SECTCLR1850",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"SECTCLR1850"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "1HQ_DeleteBankBySWIFT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/EBOSPLPWXXX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"EBOSPLPWXXX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2HQ_DeleteBankBySWIFT Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/ODMSPLP1XXX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"ODMSPLP1XXX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8digit_DeleteBankBySWIFT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/LLBBLV2X",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"LLBBLV2X"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "**Delete swift-code data if swiftCode matches the one in the database.**"
+		},
+		{
+			"name": "Sequence",
+			"item": [
+				{
+					"name": "POST (HQ - Italy 99999999XXX)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Rome\",\r\n    \"bankName\": \"Rome Bank\",\r\n    \"countryISO2\": \"IT\",\r\n    \"countryName\": \"Italy\",\r\n    \"isHeadquarter\": true,\r\n    \"swiftCode\": \"99999999XXX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST (Branch- Italy 99999999000)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Milano\",\r\n    \"bankName\": \"Rome Bank\",\r\n    \"countryISO2\": \"IT\",\r\n    \"countryName\": \"Italy\",\r\n    \"isHeadquarter\": false,\r\n    \"swiftCode\": \"99999999000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET (HQ)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/99999999XXX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"99999999XXX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET (Branch)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/99999999000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"99999999000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET (Italy)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/country/it",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"country",
+								"it"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE (HQ)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/99999999XXX",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"99999999XXX"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET (Branch) - 404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/99999999000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"99999999000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET (Italy) - 404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/v1/swift-codes/country/it",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"swift-codes",
+								"country",
+								"it"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "1. POST (HQ - Italy 99999999XXX)\n    \n2. POST (Branch - Italy 99999999000)\n    \n3. GET (HQ)\n    \n4. GET (Branch)\n    \n5. GET (Italy)\n    \n6. DELETE (HQ)\n    \n7. GET (Branch) - 404\n    \n8. GET (Italy) - 404"
+		}
+	]
+}
