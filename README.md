@@ -8,6 +8,7 @@
 * [How to run instructions](#how-to-run-instructions)
 * [Running Tests](#running-tests)
 * [API Endpoints](#api-endpoints)
+* [**Testing the API with Postman**](#testing-the-api-with-postman)
 
 
 <br>
@@ -62,8 +63,14 @@ docker-compose up -d
  
 ```
 
+If you want to see the logs in real-time while the container is running, you can omit the -d flag:
 
-  
+```sh
+docker-compose up
+ 
+```
+
+
 <br>
 
 ##  How to run instructions
@@ -90,7 +97,7 @@ mvn clean install
 Now you can start the application using Docker (run Docker Engine before). Run:
 
 ```sh
-docker-compose up -d --build
+docker-compose up -d
 ```
 This will build the Docker containers and start the PostgreSQL database and the Spring Boot application in the background.
 
@@ -129,5 +136,31 @@ mvn test
 | GET    | `/v1/swift-codes/country/{countryISO2code}` | Get all SWIFT codes with details for a specific country  |
 | POST   | `/v1/swift-codes`                           | Add new SWIFT code entries                               |
 | DELETE | `/v1/swift-codes/{swift-code}`              | Delete swift-code data                                   |
+
+
+<br>
+
+##  Testing the API with Postman
+
+This repository includes a Postman collection:  
+📁 `postman/SWIFTcodeAPI_voowu.postman_collection.json`
+
+It contains **a total of 25 requests**, organized into folders:
+
+- **Get All Banks By ISO2 Code** – 3 requests (`GET`)
+- **Get Bank By SWIFT code** – 5 requests (`GET`)
+- **POST - Add new SWIFT** – 6 requests (`POST`)
+- **Delete SWIFT code** – 4 requests (`DELETE`)
+- **Sequence** – 7 requests in a logical order (add → read → delete → check absence)
+
+### How to Use?
+
+1. Open Postman.
+2. Click **Import** and select the file from the `postman/` folder.
+3. Ensure the endpoints are pointing to the correct address (default is `localhost:8080`).
+4. Run.
+
+  
+<br>
 
 <br>
