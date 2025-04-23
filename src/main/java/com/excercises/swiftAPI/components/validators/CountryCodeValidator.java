@@ -2,6 +2,8 @@ package com.excercises.swiftAPI.components.validators;
 
 import com.excercises.swiftAPI.exceptions.InvalidDataException;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,8 @@ public class CountryCodeValidator {
 
     @Value("${file.iso2data.path}")
     private String iso2dataPath;
+
+    private static final Logger logger = LoggerFactory.getLogger(CountryCodeValidator.class);
 
     private final Map<String, String> countryCodeToName = new HashMap<>();
     private final Map<String, String> nameToCountryCode = new HashMap<>();
@@ -33,6 +37,7 @@ public class CountryCodeValidator {
                     nameToCountryCode.put(parts[0].trim().toUpperCase(), parts[1].trim().toUpperCase());
                 }
             }
+            logger.info("ISO2 data loaded successfully");
         }
     }
 
@@ -51,6 +56,7 @@ public class CountryCodeValidator {
         if (nameToCountryCode.get(countryName) == null) {
             return countryName;
         }
+        logger.info("CountryName ({}) to Country ISO2 code ({}) switched successfully", countryName, nameToCountryCode.get(countryName));
         return nameToCountryCode.get(countryName);
     }
 }
