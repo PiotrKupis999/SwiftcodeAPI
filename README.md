@@ -57,7 +57,7 @@ The application parses SWIFT codes from a provided file, stores them in a databa
 
 ### 2️ Run in cmd
 ```sh
-git clone https://github.com/voowu/SwiftcodeAPI
+git clone https://github.com/Piotrkupis999/SwiftcodeAPI
 cd SwiftcodeAPI
 docker-compose up -d
  
@@ -77,7 +77,7 @@ docker-compose up
 
 ### 1️ Clone the Repository
 ```sh
-git clone https://github.com/voowu/SwiftcodeAPI
+git clone https://github.com/PiotrKupis999/SwiftcodeAPI
 cd SwiftcodeAPI
 ```
 ### 2️ Install Required Tools
